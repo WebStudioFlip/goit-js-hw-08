@@ -31,7 +31,8 @@ const onFeedbackFormInput = function (event) {
 const onSubmitFeedbackForm = event => {
   event.preventDefault();  
   localMemory.remove('feedback-form-state');
-  event.target.reset(); 
+  event.target.reset();
+  console.log(valuesFeedbackForm) 
 };
 
 feedbackFormEl.addEventListener('input', throttle(onFeedbackFormInput, 500));
