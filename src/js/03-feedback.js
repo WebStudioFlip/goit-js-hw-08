@@ -23,16 +23,23 @@ const getValuesFeedbackForm = function () {
 
 getValuesFeedbackForm();
 
-const onFeedbackFormInput = function (event) {
-  valuesFeedbackForm[event.target.name] = event.target.value;
+const onFeedbackFormInput = function (event) {  
+  
+  if (event.target.value.length >0) {
+    valuesFeedbackForm[event.target.name] = event.target.value;
+  } else {delete valuesFeedbackForm[event.target.name]
+  }  
   localMemory.save('feedback-form-state', valuesFeedbackForm);
 };
 
-const onSubmitFeedbackForm = event => {
+const onSubmitFeedbackForm = event => {  
   event.preventDefault();  
   localMemory.remove('feedback-form-state');
-  event.target.reset();
-  console.log(valuesFeedbackForm) 
+  event.target.reset();  
+  if ("email" in valuesFeedbackForm && event.currentTarget.checkValidity()) {
+    console.log(valuesFeedbackForm) 
+    valuesFeedbackForm={}
+  }  
 };
 
 feedbackFormEl.addEventListener('input', throttle(onFeedbackFormInput, 500));
