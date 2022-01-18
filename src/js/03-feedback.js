@@ -33,11 +33,12 @@ const onFeedbackFormInput = function (event) {
 };
 
 const onSubmitFeedbackForm = event => {  
-  event.preventDefault();  
-  localMemory.remove('feedback-form-state');
-  event.target.reset();  
-  if ("email" in valuesFeedbackForm && event.currentTarget.checkValidity()) {
+  event.preventDefault();    
+  
+  if (("email" in valuesFeedbackForm) && ("message" in valuesFeedbackForm) && event.currentTarget.checkValidity()) {
     console.log(valuesFeedbackForm) 
+    localMemory.remove('feedback-form-state');
+    event.target.reset();  
     valuesFeedbackForm={}
   }  
 };
